@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,8 +13,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return response()->json($users, 200);
+        try {
+            $users = User::all();
+            return response()->json($users, 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'Falha ao encontrar os usuários!'
+            ], 404);
+        }
     }
 
     /**
@@ -29,8 +36,14 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
-        return response()->json($user, 200);
+        try {
+            $user = User::findOrFail($id);
+            return response()->json($user, 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'message' => 'Falha ao buscar usuário!'
+            ], 404);
+        }
     }
 
     /**
