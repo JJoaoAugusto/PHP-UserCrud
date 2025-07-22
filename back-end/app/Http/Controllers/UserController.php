@@ -12,8 +12,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
-
+        $users = User::all();
+        return response()->json($users, 200);
     }
 
     /**
@@ -29,7 +29,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return response()->json($user, 200);
     }
 
     /**
