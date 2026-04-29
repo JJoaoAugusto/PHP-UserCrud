@@ -43,7 +43,7 @@ class UserController extends Controller
             $user->fill($data);
             $user->password = Hash::make(123456);
             $user->save();
-            dd($user);
+
             return response()->json($user->toResource(), 200);
         } catch (Exception $ex) {
             return response()->json([

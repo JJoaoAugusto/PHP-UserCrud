@@ -57,12 +57,17 @@ function Register() {
         setIsLoading(false);
       })
       .catch((error) => {
-        // Erro de validação dos dados
-        if (error.status === 422) {
+        const status = error.response?.status;
+        if (status === 422 && error.response?.data?.errors) {
           setFormDataErrors(error.response.data.errors);
         } else {
-          // console.log(error);
-          toast.error(error.response.data);
+          const data = error.response?.data;
+          const message =
+            typeof data === "string"
+              ? data
+              : data?.message ??
+                "Não foi possível completar o pedido. Verifique a API e tente novamente.";
+          toast.error(message);
         }
 
         setIsLoading(false);
@@ -83,12 +88,17 @@ function Register() {
         setIsLoading(false);
       })
       .catch((error) => {
-        // Erro de validação dos dados
-        if (error.status === 422) {
+        const status = error.response?.status;
+        if (status === 422 && error.response?.data?.errors) {
           setFormDataErrors(error.response.data.errors);
         } else {
-          // console.log(error);
-          toast.error(error.response.data);
+          const data = error.response?.data;
+          const message =
+            typeof data === "string"
+              ? data
+              : data?.message ??
+                "Não foi possível completar o pedido. Verifique a API e tente novamente.";
+          toast.error(message);
         }
 
         setIsLoading(false);
